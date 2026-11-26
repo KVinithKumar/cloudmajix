@@ -136,18 +136,20 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
                 </ul>
               </div>
             </RevealItem>
-            <RevealItem className="h-full">
-              <div className="h-full rounded-3xl border border-white/8 bg-ink-900/70 p-7">
-                <h2 className="text-2xl font-bold">Tech stack</h2>
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {project.stack.map((tech) => (
-                    <li key={tech} className="glass rounded-full px-3.5 py-1.5 text-sm text-mist">
-                      {tech}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </RevealItem>
+            {project.stack.length > 0 ? (
+              <RevealItem className="h-full">
+                <div className="h-full rounded-3xl border border-white/8 bg-ink-900/70 p-7">
+                  <h2 className="text-2xl font-bold">Tech stack</h2>
+                  <ul className="mt-5 flex flex-wrap gap-2">
+                    {project.stack.map((tech) => (
+                      <li key={tech} className="glass rounded-full px-3.5 py-1.5 text-sm text-mist">
+                        {tech}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </RevealItem>
+            ) : null}
           </RevealGroup>
         </Container>
       </section>
