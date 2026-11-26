@@ -1,7 +1,9 @@
 "use server";
 
+import { after } from "next/server";
 import { z } from "zod";
 import { site } from "@/content/site";
+import { sendLeadNotification } from "@/lib/email";
 import { getSupabase } from "@/lib/supabase";
 import {
   contactSchema,
@@ -25,7 +27,7 @@ function text(formData: FormData, key: string): string {
 }
 
 /**
- * Validates a contact-form submission on the server and saves it to Supabase.
+ * Validates a contact-form submission on the server, saves it to Supabase and emails it to the inbox.
  * Works with or without JavaScript in the browser.
  */
 export async function submitLead(_previous: ContactFormState, formData: FormData): Promise<ContactFormState> {
@@ -91,6 +93,15 @@ export async function submitLead(_previous: ContactFormState, formData: FormData
       values: raw,
     };
   }
+
+  // Email the lead to the inbox after responding, so the visitor never waits on email delivery.
+  after(async () => {
+    try {
+      await sendLeadNotification(lead);
+    } catch (mailError) {
+      console.error("Contact form: lead saved, but the email notification failed.", mailError);
+    }
+  });
 
   return success;
 }
