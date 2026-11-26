@@ -18,7 +18,7 @@ export default function WorkPage() {
       <PageHeader
         eyebrow="Our work"
         title="Software we're proud to put our name on."
-        intro="Real problems, practical solutions and clean execution. Projects marked “Concept” show how we approach a typical build in that area."
+        intro="Real products we’ve designed, built and shipped, from an AI-powered car marketplace to HR portals, campus systems and AI career tools."
         crumbs={[{ href: "/work", label: "Work" }]}
       />
       <section className="pb-16">

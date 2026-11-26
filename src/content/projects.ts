@@ -1,186 +1,246 @@
 /**
- * Portfolio projects.
+ * Portfolio projects shown on /work, the home page and related service pages.
  *
- * TODO: Replace these concept projects with your real past work.
- * For each real project, set `isConcept: false`, fill in the details, and add
- * screenshots to /public/images/work/ (then set `image` to e.g. "/images/work/my-project.jpg").
- * Concept projects are clearly labelled "Concept" on the site so visitors aren't misled.
+ * To add a project: copy an entry, give it a unique `slug`, and put its banner in
+ * /public/images/work/ (1600×1000 works best; keep the important part centred).
+ * Only list client work you have permission to show.
  */
 export type ProjectKind = "web" | "mobile" | "game" | "voice" | "dashboard" | "payments";
+
+/** "client" = delivered for a client or employer; "product" = our own build. */
+export type ProjectType = "client" | "product";
 
 export type Project = {
   slug: string;
   title: string;
   client: string;
-  isConcept: boolean;
+  type: ProjectType;
   year: string;
   summary: string;
   services: string[];
   kind: ProjectKind;
   /** Hex colour used for the card cover glow. */
   accent: string;
+  /** Banner image in /public (falls back to an illustrated cover when missing). */
   image?: string;
   liveUrl?: string;
   challenge: string;
   solution: string;
   features: string[];
   stack: string[];
+  /** What the finished build delivers. */
   outcomes: string[];
+};
+
+export const projectTypeLabel: Record<ProjectType, string> = {
+  client: "Client project",
+  product: "Own product",
 };
 
 export const projects: readonly Project[] = [
   {
-    slug: "ringready-ai-receptionist",
-    title: "RingReady",
-    client: "AI receptionist for clinics",
-    isConcept: true,
+    slug: "cararth-ai-car-marketplace",
+    title: "CarArth",
+    client: "AARO7 Fintech · Hyderabad, India",
+    type: "client",
     year: "2026",
-    summary: "An AI voice agent that answers clinic calls 24/7, books appointments and sends call summaries to staff.",
-    services: ["ai-voice-calling", "ai-agents-chatbots"],
-    kind: "voice",
-    accent: "#34d399",
-    challenge:
-      "Small clinics miss a large share of calls during busy hours and after closing. Every missed call risks a lost patient, and front-desk staff spend much of the day on routine scheduling questions.",
-    solution:
-      "A natural-sounding AI receptionist connected to the clinic's calendar. It answers instantly, books and reschedules appointments, answers common questions about hours, location and insurance, and transfers urgent calls to staff.",
-    features: [
-      "Answers calls on the first ring, 24/7",
-      "Two-way calendar sync for booking and rescheduling",
-      "Call summaries and transcripts sent by email and SMS",
-      "Live transfer for urgent or sensitive calls",
-      "English and French conversations",
-    ],
-    stack: ["OpenAI", "Twilio", "ElevenLabs", "Node.js", "Google Calendar API", "Supabase"],
-    outcomes: [
-      "Designed to answer every incoming call, including after hours",
-      "Frees front-desk staff from routine booking calls",
-      "Gives owners a searchable record of every conversation",
-    ],
-  },
-  {
-    slug: "shopnorth-ecommerce",
-    title: "ShopNorth",
-    client: "Online store for a Canadian retailer",
-    isConcept: true,
-    year: "2026",
-    summary: "A lightning-fast online store with Canadian tax, shipping and a checkout built to reduce abandoned carts.",
-    services: ["website-development", "payments-billing", "ui-ux-design"],
+    summary:
+      "An AI-powered used-car platform that helps buyers find, compare and trust pre-owned vehicles, with a conversational buyer advisor, deal scoring and fraud-risk checks.",
+    services: ["ai-agents-chatbots", "ai-ml-solutions", "website-development"],
     kind: "web",
     accent: "#22d3ee",
+    image: "/images/work/cararth.jpg",
+    liveUrl: "https://cararth.com",
     challenge:
-      "Many small retailers run on slow, template-based stores with confusing checkouts, high cart abandonment and no proper handling of provincial sales tax.",
+      "Buying a used car means comparing scattered listings, guessing whether a price is fair and hoping the odometer and paperwork are honest. Classified sites show listings, but give buyers very little help deciding which car to trust.",
     solution:
-      "A custom storefront with instant page loads, smart product search, a one-page checkout, automatic GST/HST/PST calculation and shipping rates from Canadian carriers.",
+      "A buyer-first platform that brings listings into one place and adds an intelligence layer on top: an AI advisor that turns plain-language requests into searches, market-aware deal scoring, listing credibility ranking and odometer fraud-risk signals, backed by a domain-specific automotive knowledge base.",
     features: [
-      "Sub-second page loads on mobile",
-      "One-page checkout with Apple Pay and Google Pay",
-      "Automatic provincial sales tax",
-      "Live Canada Post shipping rates",
-      "Inventory and order dashboard",
+      "Ms. 7: a conversational AI advisor that understands requests like “an SUV under ₹10 lakh in Hyderabad”",
+      "Master 7: market intelligence that scores deals and explains each recommendation",
+      "OdoShield: odometer and fraud-risk signals from records, service and insurance history",
+      "TrustRank: listing credibility ranking that sellers can't pay to boost",
+      "Car detail pages with photo gallery, EMI calculator, location map and similar cars",
+      "Retrieval-augmented automotive knowledge base built on PostgreSQL and pgvector",
     ],
-    stack: ["Next.js", "TypeScript", "Stripe", "Supabase", "Tailwind CSS", "Vercel"],
+    stack: [
+      "React",
+      "Vite",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "pgvector",
+      "OpenAI embeddings",
+      "Drizzle ORM",
+      "FireCrawl",
+      "Cloudinary",
+      "Twilio",
+      "Google Maps",
+      "GitHub Actions",
+    ],
     outcomes: [
-      "Built for top Lighthouse performance scores",
-      "Checkout reduced to a single page",
-      "Owner can manage products without a developer",
+      "One place to search, compare and shortlist used cars",
+      "Plain-language search instead of endless filters",
+      "Every recommendation comes with an explanation and risk signals",
+      "Grounded AI answers with source attribution, not guesswork",
     ],
   },
   {
-    slug: "trailmate-mobile-app",
-    title: "TrailMate",
-    client: "Outdoor adventure mobile app",
-    isConcept: true,
-    year: "2026",
-    summary: "A cross-platform hiking companion with offline maps, trip planning and safety check-ins.",
-    services: ["app-development", "ui-ux-design"],
-    kind: "mobile",
+    slug: "kodebloom-hr-portal",
+    title: "KodeBloom HR Portal",
+    client: "KodeBloom Technologies",
+    type: "client",
+    year: "2025",
+    summary:
+      "A role-based HR and team management portal for directors, HR, project managers and employees, with performance reviews, projects, holidays and Excel reports.",
+    services: ["website-development", "ui-ux-design", "cloud-devops"],
+    kind: "dashboard",
     accent: "#7c3aed",
+    image: "/images/work/kodebloom-hr.jpg",
     challenge:
-      "Hikers in Canada's backcountry often lose signal, and most trail apps stop working exactly when they're needed most.",
+      "A growing tech team was managing employees, projects, performance and announcements across spreadsheets and chat threads. Every role needed a different view, and nothing was in one place.",
     solution:
-      "An offline-first app for iOS and Android that downloads trail maps in advance, tracks routes by GPS without signal, and sends automatic safety check-ins to a trusted contact.",
+      "A secure web portal with separate dashboards for directors, HR, project managers and employees. Each role sees exactly what it needs, and HR can export any report to Excel in one click.",
     features: [
-      "Offline maps and GPS tracking",
-      "Trip planner with weather and daylight",
-      "Automatic safety check-ins",
-      "Photo journal of each hike",
-      "Built once for iOS and Android",
+      "Role-based dashboards for Director, HR, PM and Employee",
+      "Employee directory with profiles and documents",
+      "Project assignment and tracking",
+      "Performance reviews and ratings",
+      "Company holidays calendar and announcements",
+      "In-app notifications and one-click Excel exports",
     ],
-    stack: ["React Native", "Expo", "TypeScript", "Mapbox", "Supabase", "Push notifications"],
+    stack: ["React", "Vite", "Tailwind CSS", "TanStack Query", "Node.js", "Express", "MongoDB", "JWT", "Multer", "ExcelJS"],
     outcomes: [
-      "Fully usable with no mobile signal",
-      "Single codebase for both app stores",
-      "Designed for one-handed use on the trail",
+      "One portal replaces scattered spreadsheets",
+      "Every role gets its own focused dashboard",
+      "Reports go from hours of copy-paste to a single click",
+      "Secure sign-in with role-based access to every page",
     ],
   },
   {
-    slug: "aurora-dash-game",
-    title: "Aurora Dash",
-    client: "Casual mobile game",
-    isConcept: true,
+    slug: "kodebloom-campus-leave-attendance",
+    title: "Campus Leave & Attendance",
+    client: "KodeBloom Technologies · education platform",
+    type: "client",
     year: "2026",
-    summary: "A neon endless-runner under the northern lights, with daily challenges and global leaderboards.",
-    services: ["game-development"],
-    kind: "game",
-    accent: "#c6ff3d",
-    challenge: "Casual games live or die in the first 30 seconds: controls must feel instant and progression must keep players coming back.",
+    summary:
+      "A leave, attendance and timetable system for schools and colleges, with approval workflows for principals, staff and students, plus PDF and Excel reports.",
+    services: ["website-development", "app-development", "ui-ux-design"],
+    kind: "dashboard",
+    accent: "#34d399",
+    image: "/images/work/kodebloom-campus.jpg",
+    challenge:
+      "Schools were handling leave requests on paper, marking attendance in registers and rebuilding timetables by hand whenever a teacher was away. Principals had no live picture of who was in and who was out.",
     solution:
-      "A one-thumb runner with tight, responsive controls, procedurally generated levels, daily challenges, cosmetic unlocks and leaderboards, tuned to run smoothly on older phones.",
+      "A web platform with separate logins for admins, principals, staff and students. Leave requests flow through a clear approval chain, attendance is marked digitally, timetable changes are tracked, and reports are ready to download as PDF or Excel.",
     features: [
-      "One-thumb controls with instant response",
-      "Procedurally generated levels",
-      "Daily challenges and streaks",
-      "Global leaderboards and cloud saves",
-      "Optimised for 60 fps on older devices",
+      "Admin, principal, staff and student dashboards",
+      "Leave requests with multi-step approval",
+      "Digital attendance with history",
+      "Timetables and schedule-change tracking",
+      "Announcements for the whole campus",
+      "OTP verification, photo uploads and PDF/Excel reports",
     ],
-    stack: ["Unity", "C#", "PlayFab", "Blender", "Unity Analytics"],
-    outcomes: ["Playable prototype in two weeks", "Built-in retention loops from day one", "Ready for iOS, Android and web"],
+    stack: ["React", "Vite", "Tailwind CSS", "Node.js", "Express", "MongoDB", "JWT", "Cloudinary", "PDFKit", "jsPDF"],
+    outcomes: [
+      "Paper leave forms replaced with a tracked approval flow",
+      "Principals see attendance and leave in real time",
+      "Every action is logged for accountability",
+      "Reports ready to print or share in seconds",
+    ],
   },
   {
-    slug: "paydesk-billing-portal",
-    title: "PayDesk",
-    client: "Bill payment portal for property managers",
-    isConcept: true,
-    year: "2026",
-    summary: "A tenant billing portal with recurring rent payments, automatic reminders and accounting sync.",
-    services: ["payments-billing", "website-development"],
-    kind: "payments",
-    accent: "#ff4d5e",
-    challenge: "Property managers spend days each month chasing rent cheques and e-Transfers, and reconciling payments by hand.",
-    solution:
-      "A secure portal where tenants view statements and pay by card or pre-authorised debit, with automatic recurring payments, reminders before due dates and instant sync to accounting software.",
-    features: [
-      "Recurring and one-time payments",
-      "Pre-authorised debit and card payments",
-      "Automatic reminders and receipts",
-      "Owner dashboard with arrears tracking",
-      "QuickBooks sync",
-    ],
-    stack: ["Next.js", "Stripe", "PostgreSQL", "Supabase", "QuickBooks API", "Resend"],
-    outcomes: ["Payments reconcile automatically", "Tenants can pay anytime from their phone", "Late-payment follow-ups run on their own"],
-  },
-  {
-    slug: "insightml-forecasting",
-    title: "InsightML",
-    client: "Demand forecasting dashboard",
-    isConcept: true,
-    year: "2026",
-    summary: "A machine-learning dashboard that forecasts weekly demand so retailers order the right stock.",
-    services: ["ai-ml-solutions", "cloud-devops"],
+    slug: "pathfinder-ai-career-guide",
+    title: "PathFinder AI",
+    client: "AI career guidance for students",
+    type: "product",
+    year: "2025",
+    summary:
+      "An AI career guide that analyses a student's profile, interests and résumé, then recommends career paths, the skills to build and courses to get there.",
+    services: ["ai-ml-solutions", "ai-agents-chatbots", "website-development"],
     kind: "dashboard",
     accent: "#6366f1",
-    challenge: "Over-ordering ties up cash in stock, while under-ordering loses sales. Most small retailers forecast with spreadsheets and instinct.",
+    image: "/images/work/pathfinder-ai.jpg",
+    challenge:
+      "Students choose careers with little guidance. Generic advice ignores their actual strengths, and most don't know which skills employers want or where to learn them.",
     solution:
-      "A forecasting model trained on sales history, seasonality and holidays, presented in a simple dashboard that recommends order quantities for each product every week.",
+      "A Next.js platform powered by Google's Gemini models through Genkit. Students share their academic profile, interests and résumé, and the AI returns personalised career matches with the skills each path needs and practical next steps.",
     features: [
-      "Weekly demand forecast per product",
-      "Seasonality and holiday awareness",
-      "Suggested order quantities",
-      "Accuracy tracking over time",
-      "Automated data pipeline from the POS",
+      "AI analysis of academic profile, interests and résumé",
+      "Personalised career matches with clear explanations",
+      "Skill-gap breakdown for every suggested path",
+      "Upskilling plan with links to courses",
+      "Downloadable PDF career report",
+      "Clean, responsive interface designed for students",
     ],
-    stack: ["Python", "scikit-learn", "Prophet", "FastAPI", "PostgreSQL", "React", "Google Cloud"],
-    outcomes: ["Forecasts refresh automatically every week", "Clear recommendations instead of raw numbers", "Accuracy monitored and reported"],
+    stack: ["Next.js", "React", "TypeScript", "Genkit", "Google Gemini", "Firebase", "Tailwind CSS", "Radix UI", "Zod"],
+    outcomes: [
+      "Career advice tailored to each student, in minutes",
+      "Clear skill gaps instead of vague suggestions",
+      "A concrete learning plan students can act on",
+    ],
+  },
+  {
+    slug: "wealth-map-property-intelligence",
+    title: "Wealth Map",
+    client: "Property ownership intelligence",
+    type: "product",
+    year: "2025",
+    summary:
+      "An interactive map that reveals who owns property and what it's worth, built on a data pipeline that merges public property records and refreshes automatically.",
+    services: ["ai-ml-solutions", "website-development", "cloud-devops"],
+    kind: "dashboard",
+    accent: "#ff4d5e",
+    image: "/images/work/wealth-map.jpg",
+    challenge:
+      "Property ownership and valuation data is public, but it's spread across several large datasets that are hard to join and impossible to explore without technical skills.",
+    solution:
+      "A Python ETL pipeline that merges deed transfers, ownership parties, land-use and assessment records into one clean dataset, served through a Node.js API and explored on an interactive map with owner profiles and wealth breakdowns.",
+    features: [
+      "Interactive map with owner markers and clustering",
+      "Owner profiles with estimated property value",
+      "Wealth breakdown charts",
+      "Python ETL merging four public datasets",
+      "Scheduled data refresh with cron jobs",
+      "Google sign-in and secure accounts",
+    ],
+    stack: ["React", "Leaflet", "Recharts", "Tailwind CSS", "Node.js", "Express", "MongoDB", "Python", "pandas", "node-cron", "Google OAuth"],
+    outcomes: [
+      "Four large public datasets turned into one explorable map",
+      "Data stays fresh without manual work",
+      "Complex property research made visual and simple",
+    ],
+  },
+  {
+    slug: "cryptofolio-trading-simulator",
+    title: "Cryptofolio",
+    client: "Virtual crypto trading app",
+    type: "product",
+    year: "2025",
+    summary:
+      "A virtual cryptocurrency trading app with live market prices, a practice portfolio and historical charts, so people can learn to trade without risking real money.",
+    services: ["app-development", "payments-billing", "ui-ux-design"],
+    kind: "payments",
+    accent: "#c6ff3d",
+    image: "/images/work/cryptofolio.jpg",
+    liveUrl: "https://fd0092d9.mobsted.com/pwa/?appid=16",
+    challenge:
+      "New investors want to understand crypto markets, but learning with real money is expensive and stressful.",
+    solution:
+      "A React web app, installable on phones as a PWA, that simulates buying and selling with virtual funds using real-time market data, and tracks how each decision would have performed.",
+    features: [
+      "Real-time cryptocurrency prices and trends",
+      "Buy and sell with virtual funds",
+      "Portfolio tracking with gains and losses",
+      "Historical price charts across time ranges",
+      "Installable on mobile as a progressive web app",
+    ],
+    stack: ["React", "React Router", "JavaScript", "Market data API", "Progressive Web App"],
+    outcomes: [
+      "Risk-free way to learn trading",
+      "Live market data for a realistic experience",
+      "Works on desktop and as a phone app",
+    ],
   },
 ];
 

@@ -44,8 +44,8 @@ export default function TermsPage() {
         set in a written quote or agreement.
       </p>
       <p>
-        Projects marked as &ldquo;Concept&rdquo; are examples that illustrate our approach and capabilities. They are not work
-        delivered for a specific client.
+        Projects marked &ldquo;Client project&rdquo; were delivered for the client or employer named. Projects marked
+        &ldquo;Own product&rdquo; are our own builds. Names and trademarks belong to their respective owners.
       </p>
 
       <h2>4. Intellectual property</h2>

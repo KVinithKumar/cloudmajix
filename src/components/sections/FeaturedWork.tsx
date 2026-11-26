@@ -18,7 +18,7 @@ export function FeaturedWork() {
                 Ideas we&rsquo;ve turned into <span className="text-aurora">real products.</span>
               </>
             }
-            intro="A look at the kind of software we design and build, from AI receptionists to online stores and mobile games."
+            intro="A few of the platforms we’ve built, from AI-powered marketplaces to business portals used every day."
           />
           <ButtonLink href="/work" variant="secondary" className="shrink-0 self-start lg:self-end">
             View all work <ArrowRight className="h-4 w-4" aria-hidden="true" />

@@ -4,7 +4,7 @@ import type { Project } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
 /**
- * Cover art for a project card. Uses the real screenshot when `project.image` is set,
+ * Cover art for a project card. Uses the banner image when `project.image` is set,
  * otherwise draws a lightweight illustrated mock-up (no image download needed).
  */
 export function ProjectCover({ project, priority = false, className }: { project: Project; priority?: boolean; className?: string }) {
@@ -21,7 +21,7 @@ export function ProjectCover({ project, priority = false, className }: { project
       {project.image ? (
         <Image
           src={project.image}
-          alt={`${project.title} screenshot`}
+          alt={`${project.title} project banner`}
           fill
           priority={priority}
           sizes="(min-width: 1024px) 50vw, 100vw"

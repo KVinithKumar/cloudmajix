@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import type { Project } from "@/content/projects";
+import { projectTypeLabel, type Project } from "@/content/projects";
 import { services } from "@/content/services";
 import { ProjectCover } from "@/components/ui/ProjectCover";
 import { TiltCard } from "@/components/motion/TiltCard";
@@ -18,11 +18,9 @@ export function ProjectCard({ project }: { project: Project }) {
       >
         <div className="relative">
           <ProjectCover project={project} />
-          {project.isConcept ? (
-            <span className="glass absolute top-3 left-3 rounded-full px-2.5 py-1 text-[11px] font-semibold tracking-wide text-mist">
-              Concept
-            </span>
-          ) : null}
+          <span className="glass absolute top-3 left-3 rounded-full px-2.5 py-1 text-[11px] font-semibold tracking-wide text-snow">
+            {projectTypeLabel[project.type]}
+          </span>
         </div>
         <div className="flex flex-1 flex-col p-4 pt-5">
           <div className="flex items-start justify-between gap-4">

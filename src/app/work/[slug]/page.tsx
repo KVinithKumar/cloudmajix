@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ArrowUpRight, Check, Info } from "lucide-react";
-import { getProject, projects } from "@/content/projects";
+import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
+import { getProject, projects, projectTypeLabel } from "@/content/projects";
 import { services } from "@/content/services";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Container } from "@/components/ui/Container";
@@ -52,6 +52,10 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
       >
         <dl className="flex flex-wrap gap-x-10 gap-y-4 text-sm">
           <div>
+            <dt className="text-fog">Type</dt>
+            <dd className="mt-1 font-semibold">{projectTypeLabel[project.type]}</dd>
+          </div>
+          <div>
             <dt className="text-fog">Year</dt>
             <dd className="mt-1 font-semibold">{project.year}</dd>
           </div>
@@ -70,7 +74,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
               <dt className="text-fog">Live site</dt>
               <dd className="mt-1">
                 <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-lime hover:underline">
-                  Visit <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  Visit site <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                 </a>
               </dd>
             </div>
@@ -83,12 +87,6 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
           <Reveal>
             <ProjectCover project={project} priority className="aspect-[16/9] rounded-[2rem]" />
           </Reveal>
-          {project.isConcept ? (
-            <p className="mt-4 flex items-start gap-2 text-sm text-fog">
-              <Info className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-              This is a concept project. It shows how we would approach this kind of build, not work delivered for a specific client.
-            </p>
-          ) : null}
         </Container>
       </section>
 
@@ -127,7 +125,7 @@ export default async function ProjectPage({ params }: PageProps<"/work/[slug]">)
             </RevealItem>
             <RevealItem className="h-full">
               <div className="h-full rounded-3xl border border-white/8 bg-ink-900/70 p-7">
-                <h2 className="text-2xl font-bold">{project.isConcept ? "Goals" : "Results"}</h2>
+                <h2 className="text-2xl font-bold">What it delivers</h2>
                 <ul className="mt-5 space-y-3">
                   {project.outcomes.map((outcome) => (
                     <li key={outcome} className="flex gap-3 text-mist">
